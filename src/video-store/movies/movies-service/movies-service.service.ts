@@ -5,11 +5,11 @@ import { Movie } from '../movie.entity';
 
 @Injectable()
 export class MoviesService {
-    constructor(@InjectRepository(Movie) private movieRepository: Repository<Movie>) { }
+    constructor(@InjectRepository(Movie) private readonly movieRepository: Repository<Movie>) { }
 
     async getMovies(): Promise<Movie[]> {
         const movies = await this.movieRepository.find({
-            select: ['id','title', 'director', 'isRented'],
+            select: ['id', 'title', 'director', 'isRented'],
             where: [{ "isRented": 0 }]
         });
 
@@ -17,22 +17,18 @@ export class MoviesService {
     }
 
     async getMovieByTitle(title: string): Promise<Movie[]> {
-        return await this.movieRepository.find({
-            select: ["title", "director", "isRented"],
+        return this.movieRepository.find({
+            select: ["title", "director", "isRented", "id"],
             where: [{ "title": title }]
         });
     }
 
     async rentMovie(id: string) {
-        let movie: Movie = await this.movieRepository.findOne({ where: [{ "id": id }] });
-        movie.isRented = true;
-        this.movieRepository.update(movie.id, movie);
+        return this.movieRepository.update(id, { isRented: true });
     }
 
     async returnMovie(id: string) {
-        let movie: Movie = await this.movieRepository.findOne({ where: [{ "id": id }] });
-        movie.isRented = false;
-        this.movieRepository.update(movie.id, movie);
+        return this.movieRepository.update(id, { isRented: false });
     }
 
     async populate() {

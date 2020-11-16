@@ -4,7 +4,7 @@ import { MoviesService } from './movies-service/movies-service.service';
 @Controller('movies')
 export class MoviesController {
 
-    constructor(protected service: MoviesService) { }
+    constructor(private service: MoviesService) { }
 
     @Get()
     getAvailableMovies() {

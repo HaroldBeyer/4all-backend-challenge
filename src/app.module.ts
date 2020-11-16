@@ -2,10 +2,11 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { VideoStoreModule } from './video-store/video-store.module';
+import { UserModule } from './user/user.module';
+import { MovieModule } from './movie/movie.module';
 
 @Module({
-  imports: [VideoStoreModule, TypeOrmModule.forRoot()],
+  imports: [TypeOrmModule.forRoot(), UserModule, MovieModule],
   controllers: [AppController],
   providers: [AppService],
 })

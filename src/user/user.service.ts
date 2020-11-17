@@ -10,14 +10,14 @@ export class UserService {
 
     constructor(@InjectRepository(User) private userRepository: Repository<User>) { }
 
-    async findOne(email: string): Promise<User | undefined> {
+    async getByEmail(email: string): Promise<User | undefined> {
         return this.userRepository.findOne({
             where: [{ email }]
         });
     }
 
     async createUser(password: string, email: string) {
-        const user = await this.findOne(email);
+        const user = await this.getByEmail(email);
 
         if (user)
             throw new NotAcceptableException();

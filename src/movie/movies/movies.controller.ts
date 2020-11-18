@@ -1,26 +1,31 @@
 import { MoviesService } from './movies-service/movies-service.service';
-import { Controller, Get, Param, Post } from '@nestjs/common';
+import { Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/shared/jwt.guard';
 
 @Controller('movies')
 export class MoviesController {
 
-    constructor(private service: MoviesService) { }
+    constructor(private readonly service: MoviesService) { }
 
+    @UseGuards(JwtAuthGuard)
     @Get()
     getAvailableMovies() {
         return this.service.getMovies();
     }
 
+    @UseGuards(JwtAuthGuard)
     @Post(':id/rent')
     rent(@Param('id') id: string) {
         return this.service.rentMovie(id);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Post(':id/return')
     return(@Param('id') id: string) {
         return this.service.returnMovie(id);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get(':title/title')
     getByTitle(@Param('title') title: string) {
         return this.service.getMovieByTitle(title);

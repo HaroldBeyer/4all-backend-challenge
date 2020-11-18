@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiOkResponse, ApiParam, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/shared/jwt.guard';
 import { Movie } from './shared/movie.entity';
@@ -13,13 +13,16 @@ export class MoviesController {
 
     @ApiUnauthorizedResponse({ description: 'When sending invalid JWT token' })
     @ApiOkResponse({
-        description: "Returned all movies", schema: {
-            type: "object",
-            properties: {
-                id: { type: 'string' },
-                title: { type: 'string' },
-                director: { type: 'string' },
-                isRented: { type: 'boolean' }
+        description: "Returned all movies with the specified name", schema: {
+            type: "array",
+            items: {
+                type: 'object',
+                properties: {
+                    id: { type: 'string' },
+                    title: { type: 'string' },
+                    director: { type: 'string' },
+                    isRented: { type: 'boolean' }
+                }
             }
         }
     })
@@ -32,7 +35,7 @@ export class MoviesController {
 
     @ApiBearerAuth()
     @ApiUnauthorizedResponse()
-    @ApiOkResponse({description: "Succesfully rented movie"})
+    @ApiOkResponse({ description: "Succesfully rented movie" })
     @UseGuards(JwtAuthGuard)
     @Post(':id/rent')
     rent(@Param('id') id: string) {
@@ -41,7 +44,7 @@ export class MoviesController {
 
     @ApiBearerAuth()
     @ApiUnauthorizedResponse()
-    @ApiOkResponse({description: "Succesfully returned movie"})
+    @ApiOkResponse({ description: "Succesfully returned movie" })
     @UseGuards(JwtAuthGuard)
     @Post(':id/return')
     return(@Param('id') id: string) {
@@ -51,20 +54,23 @@ export class MoviesController {
     @ApiUnauthorizedResponse({ description: 'When sending invalid JWT token' })
     @ApiOkResponse({
         description: "Returned all movies with the specified name", schema: {
-            type: "object",
-            properties: {
-                id: { type: 'string' },
-                title: { type: 'string' },
-                director: { type: 'string' },
-                isRented: { type: 'boolean' }
+            type: "array",
+            items: {
+                type: 'object',
+                properties: {
+                    id: { type: 'string' },
+                    title: { type: 'string' },
+                    director: { type: 'string' },
+                    isRented: { type: 'boolean' }
+                }
             }
         }
     })
-    @ApiParam({name: 'JWT', description: "Bearer token", type: 'string'})
+    @ApiParam({ name: 'JWT', description: "Bearer token", type: 'string' })
     @ApiBearerAuth()
     @ApiUnauthorizedResponse()
     @UseGuards(JwtAuthGuard)
-    @Get(':title/title')
+    @Get('title/:title')
     getByTitle(@Param('title') title: string) {
         return this.service.getMovieByTitle(title);
     }

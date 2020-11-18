@@ -1,6 +1,6 @@
-import { MoviesService } from './movies-service/movies-service.service';
 import { Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/shared/jwt.guard';
+import { MoviesService } from './shared/movies.service';
 
 @Controller('movies')
 export class MoviesController {

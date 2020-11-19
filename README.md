@@ -73,6 +73,4 @@ $ npm run test:cov
 
 Após inicialização da aplicação, ir para [Página do webservice](http://localhost:3000/api "Página do webservice")
 
-## Licensa
-
-  Nest tem uma licença [MIT](LICENSE).
+Para poder acessar o JSON, vá para a [Página do JSON](http://localhost:3000/api-json)

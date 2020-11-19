@@ -1,5 +1,5 @@
 
-# Desafio Back-End NodeJS :smile:
+# Desafio Back-End NodeJS
 
 ## Descrição
 

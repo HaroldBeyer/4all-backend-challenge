@@ -10,6 +10,21 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
-    "incremental": true
-  }
+    "incremental": true,
+    "paths": {
+      "@app": [
+        "<rootDir/src/"
+      ],
+      "@movies": [
+        "<rootDir>/src/movies"
+      ],
+      "@users": [
+        "<rootDir>/src/user"
+      ],
+      "@utils": [
+        "<rootDir>/src/utils"
+      ]
+    },
+    "rootDir": ".",
+  },
 }

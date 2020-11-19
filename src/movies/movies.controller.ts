@@ -66,7 +66,6 @@ export class MoviesController {
             }
         }
     })
-    @ApiParam({ name: 'JWT', description: "Bearer token", type: 'string' })
     @ApiBearerAuth()
     @ApiUnauthorizedResponse()
     @UseGuards(JwtAuthGuard)

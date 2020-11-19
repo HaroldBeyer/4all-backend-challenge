@@ -7,7 +7,7 @@ import { UserService } from './shared/user.service';
 @Controller('users')
 export class UsersController {
 
-    constructor(private userService: UserService) { }
+    constructor(private readonly userService: UserService) { }
 
     @ApiNotAcceptableResponse({ description: "When you insert an already used email" })
     @ApiBadRequestResponse({ description: "When you forget to insert one or more fields of the user in the body object" })

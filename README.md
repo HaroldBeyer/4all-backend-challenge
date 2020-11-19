@@ -17,7 +17,7 @@ Primeiramente alterar a senha do usuário root
 
 
 ```sql
-ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyNewPass';
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'haroldo';
 ```
 Logo em seguida criar o banco de dados
 

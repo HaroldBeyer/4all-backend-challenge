@@ -13,7 +13,11 @@ $ npm install
 
 ## Configuração do banco de dados
 
-Primeiramente alterar a senha do usuário root 
+Estou utilizando o banco de dados MYSQL.
+
+Inicialmente, instalar o MYSQL para o SO utilizado. No meu caso, utilizei o Linux Manjaro.
+
+Então, alterar a senha do usuário root 
 
 
 ```sql
